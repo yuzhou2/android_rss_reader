@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#fff</color>
+    <color name="lighter_gray">#ddd</color>
+    <color name="darker_gray">#aaa</color>
+
+    <style name="AppTheme" parent="android:Theme.Material.Light">
+        <item name="android:colorPrimary">#fcfcfc</item>
+        <item name="android:textColorPrimary">@color/darker_gray</item>
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:activatedBackgroundIndicator">@drawable/nav_drawer_listselector</item>
+    </style>
+
+</resources>
