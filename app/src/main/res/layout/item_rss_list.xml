@@ -1,28 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:layout_height="70dp">
 
     <ImageView
         android:id="@+id/item__image"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:src="@mipmap/ic_launcher"/>
+        android:layout_width="88dp"
+        android:layout_height="66dp"
+        android:scaleType="centerCrop"/>
 
     <TextView
         android:id="@+id/item__title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_alignTop="@id/item__image"
+        android:layout_marginStart="10dp"
         android:layout_toEndOf="@+id/item__image"
-        android:text="Title"/>
+        android:text="Title"
+        android:textStyle="bold"/>
 
     <TextView
         android:id="@+id/item__description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/item__title"
+        android:layout_marginStart="10dp"
         android:layout_toEndOf="@+id/item__image"
-        android:text="Description"/>
+        android:text="Description"
+        android:textColor="@color/darker_gray"
+        android:textSize="12sp"/>
 
 </RelativeLayout>

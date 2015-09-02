@@ -31,8 +31,8 @@ public class MainActivity extends Activity
     public MainActivity()
     {
         newsList = new ImmutableMap.Builder<String, String>()
-                .put("蘋果日報", "http://www.appledaily.com.tw/rss/newcreate/kind/rnews/type/new")
                 .put("硬塞", "http://www.inside.com.tw/feed")
+                .put("蘋果日報", "http://www.appledaily.com.tw/rss/newcreate/kind/rnews/type/new")
                 .build();
     }
 
