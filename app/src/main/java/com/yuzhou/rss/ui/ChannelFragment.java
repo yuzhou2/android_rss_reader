@@ -6,9 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
@@ -27,7 +25,7 @@ import java.util.List;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class NewsFragment extends Fragment
+public class ChannelFragment extends Fragment
 {
     private static final String ARG_NEWS_URL = "news_url";
     private static final String ARG_RESOURCE_LAYOUT = "layout";
@@ -36,9 +34,9 @@ public class NewsFragment extends Fragment
      * Returns a new instance of this fragment for the given section
      * number.
      */
-    public static NewsFragment newInstance(String url, int layout)
+    public static ChannelFragment newInstance(String url, int layout)
     {
-        NewsFragment fragment = new NewsFragment();
+        ChannelFragment fragment = new ChannelFragment();
         Bundle args = new Bundle();
         args.putString(ARG_NEWS_URL, url);
         args.putInt(ARG_RESOURCE_LAYOUT, layout);
@@ -48,11 +46,11 @@ public class NewsFragment extends Fragment
 
     private EventBus eventBus;
     private MainActivity activity;
-    private RssItemAdapter adapter;
+    private ChannelAdapter adapter;
     private ListView listView;
     private List<RssItem> items;
 
-    public NewsFragment()
+    public ChannelFragment()
     {
     }
 
@@ -87,7 +85,7 @@ public class NewsFragment extends Fragment
         int layout = getArguments().getInt(ARG_RESOURCE_LAYOUT);
 
         items = new ArrayList<>();
-        adapter = new RssItemAdapter(activity, layout, items);
+        adapter = new ChannelAdapter(activity, layout, items);
         listView.setAdapter(adapter);
 
         ContentFetcher fetcher = new ContentFetcher(eventBus);

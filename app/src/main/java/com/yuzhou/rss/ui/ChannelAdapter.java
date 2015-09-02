@@ -18,11 +18,11 @@ import java.util.List;
 /**
  * Created by yuzhou on 2015/09/01.
  */
-public class RssItemAdapter extends ArrayAdapter<RssItem>
+public class ChannelAdapter extends ArrayAdapter<RssItem>
 {
     private int resource;
 
-    public RssItemAdapter(Context context, int resource, List<RssItem> items)
+    public ChannelAdapter(Context context, int resource, List<RssItem> items)
     {
         super(context, resource, items);
         this.resource = resource;
