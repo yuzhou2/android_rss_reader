@@ -5,8 +5,10 @@
 
     <ImageView
         android:id="@+id/item__image"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"/>
 
     <TextView
         android:id="@+id/item__title"
@@ -14,7 +16,8 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:text="Title"/>
+        android:text="Title"
+        android:textColor="@color/lighter_gray"/>
 
     <TextView
         android:id="@+id/item__description"
@@ -22,6 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:text="Description"/>
+        android:text="Description"
+        android:textColor="@color/lighter_gray"/>
 
 </RelativeLayout>
