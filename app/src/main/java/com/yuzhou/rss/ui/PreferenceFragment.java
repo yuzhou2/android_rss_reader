@@ -84,7 +84,7 @@ public class PreferenceFragment extends Fragment
             public void onClick(View v)
             {
                 SharedPreferences.Editor editor = sp.edit();
-                editor.putInt("prefs_layout", R.layout.item_rss_title_only);
+                editor.putString("prefs_layout", "title_only");
                 editor.commit();
             }
         });
@@ -94,7 +94,7 @@ public class PreferenceFragment extends Fragment
             public void onClick(View v)
             {
                 SharedPreferences.Editor editor = sp.edit();
-                editor.putInt("prefs_layout", R.layout.item_rss_list);
+                editor.putString("prefs_layout", "list");
                 editor.commit();
             }
         });
@@ -104,7 +104,7 @@ public class PreferenceFragment extends Fragment
             public void onClick(View v)
             {
                 SharedPreferences.Editor editor = sp.edit();
-                editor.putInt("prefs_layout", R.layout.item_rss_card);
+                editor.putString("prefs_layout", "card");
                 editor.commit();
             }
         });

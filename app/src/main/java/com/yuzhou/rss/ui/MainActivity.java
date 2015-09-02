@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -65,17 +66,28 @@ public class MainActivity extends Activity
             return;
         }
 
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
-        int layout = sp.getInt("prefs_layout", R.layout.item_rss_list);
-
         mTitle = newsList.keySet().asList().get(position);
         String url = newsList.values().asList().get(position);
 
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.container, ChannelFragment.newInstance(url, layout))
+                .replace(R.id.container, ChannelFragment.newInstance(url, getLayout()))
                 .commit();
+    }
+
+    private int getLayout()
+    {
+        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
+        switch (sp.getString("prefs_layout", "list")) {
+        case "title_only":
+            return R.layout.item_rss_title_only;
+        case "card":
+            return R.layout.item_rss_card;
+        case "list":
+        default:
+            return R.layout.item_rss_list;
+        }
     }
 
     public void restoreActionBar()
