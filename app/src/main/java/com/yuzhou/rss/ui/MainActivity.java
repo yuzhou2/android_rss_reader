@@ -58,6 +58,7 @@ public class MainActivity extends Activity
     public void onNavigationDrawerItemSelected(int position)
     {
         if (position == newsList.size()) {
+            mTitle = "Default View";
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction()
                     .replace(R.id.container, PreferenceFragment.newInstance())

@@ -206,7 +206,7 @@ public class NavigationDrawerFragment extends Fragment
     public void setNewsTitles(List<String> titles)
     {
         newsTitles.addAll(titles);
-        newsTitles.add("Change Layout");
+        newsTitles.add("Default View");
     }
 
     private void selectItem(int position)
