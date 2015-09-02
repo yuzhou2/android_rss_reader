@@ -31,7 +31,7 @@ public class MainActivity extends Activity
     public MainActivity()
     {
         newsList = new ImmutableMap.Builder<String, String>()
-                .put("硬塞", "http://www.inside.com.tw/feed")
+                .put("Inside 硬塞的網路趨勢觀察", "http://www.inside.com.tw/feed")
                 .put("蘋果日報", "http://www.appledaily.com.tw/rss/newcreate/kind/rnews/type/new")
                 .build();
     }
@@ -44,7 +44,7 @@ public class MainActivity extends Activity
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getFragmentManager().findFragmentById(R.id.navigation_drawer);
-        mTitle = getTitle();
+        mTitle = newsList.keySet().asList().get(0);
 
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(
@@ -68,6 +68,7 @@ public class MainActivity extends Activity
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(this);
         int layout = sp.getInt("prefs_layout", R.layout.item_rss_list);
 
+        mTitle = newsList.keySet().asList().get(position);
         String url = newsList.values().asList().get(position);
 
         // update the main content by replacing fragments
@@ -76,27 +77,6 @@ public class MainActivity extends Activity
                 .replace(R.id.container, NewsFragment.newInstance(url, layout))
                 .commit();
     }
-
-    public void onSectionAttached(String title)
-    {
-        mTitle = title;
-    }
-
-    /**
-    public void onSectionAttached(int number)
-    {
-        switch (number) {
-        case 1:
-            mTitle = getString(R.string.title_section1);
-            break;
-        case 2:
-            mTitle = getString(R.string.title_section2);
-            break;
-        case 3:
-            mTitle = getString(R.string.title_section3);
-            break;
-        }
-    }*/
 
     public void restoreActionBar()
     {
@@ -127,12 +107,6 @@ public class MainActivity extends Activity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
         return super.onOptionsItemSelected(item);
     }
 

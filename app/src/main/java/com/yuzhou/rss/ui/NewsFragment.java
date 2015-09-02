@@ -108,8 +108,6 @@ public class NewsFragment extends Fragment
             RssFeed feed = RssReader.read(result.get(0));
             items.clear();
             items.addAll(feed.getRssItems());
-
-            activity.onSectionAttached(feed.getTitle());
             adapter.notifyDataSetChanged();
         } catch (SAXException e) {
             e.printStackTrace();
