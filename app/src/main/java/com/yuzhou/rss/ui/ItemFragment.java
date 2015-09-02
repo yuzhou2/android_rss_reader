@@ -1,36 +1,42 @@
 package com.yuzhou.rss.ui;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LevelListDrawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.ListFragment;
-import android.util.Log;
+import android.support.v4.app.Fragment;
+import android.text.Html;
+import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.yuzhou.rss.R;
 import com.yuzhou.rss.parser.RssItem;
 
+import java.io.InputStream;
+import java.net.URL;
+
 /**
  * Created by yuzhou on 2015/09/02.
  */
-public class ItemFragment extends ListFragment
+public class ItemFragment extends Fragment implements Html.ImageGetter
 {
-    int mNum;
 
     /**
      * Create a new instance of CountingFragment, providing "num"
      * as an argument.
      */
-    static ItemFragment newInstance(RssItem item, int num)
+    static ItemFragment newInstance(RssItem item)
     {
         ItemFragment f = new ItemFragment();
 
         // Supply num input as an argument.
         Bundle args = new Bundle();
-        args.putInt("num", num);
         args.putParcelable("rss_item", item);
         f.setArguments(args);
 
@@ -38,6 +44,7 @@ public class ItemFragment extends ListFragment
     }
 
     private RssItem rssItem;
+    private TextView tvContent;
 
     /**
      * When creating, retrieve this instance's number from its arguments.
@@ -46,7 +53,6 @@ public class ItemFragment extends ListFragment
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        mNum = getArguments() != null ? getArguments().getInt("num") : 1;
         rssItem = getArguments().getParcelable("rss_item");
     }
 
@@ -58,24 +64,58 @@ public class ItemFragment extends ListFragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View v = inflater.inflate(R.layout.fragment_item_list, container, false);
-        TextView tv = (TextView) v.findViewById(R.id.text);
-        ((TextView)tv).setText("Fragment #" + mNum);
-        tv.setText(rssItem.getTitle());
+        TextView title = (TextView) v.findViewById(R.id.article__title);
+        tvContent = (TextView) v.findViewById(R.id.article__content);
+
+        title.setText(rssItem.getTitle());
+        Spanned spanned = Html.fromHtml(rssItem.getContent(), this, null);
+        tvContent.setText(spanned);
+
         return v;
     }
 
     @Override
-    public void onActivityCreated(Bundle savedInstanceState)
+    public Drawable getDrawable(String source)
     {
-        super.onActivityCreated(savedInstanceState);
-        setListAdapter(new ArrayAdapter<String>(getActivity(),
-                android.R.layout.simple_list_item_1, new String[]{"a", "b"}));
+        LevelListDrawable d = new LevelListDrawable();
+        Drawable empty = getResources().getDrawable(R.color.white);
+        d.addLevel(0, 0, empty);
+        d.setBounds(0, 0, empty.getIntrinsicWidth(), empty.getIntrinsicHeight());
+
+        new LoadImage().execute(source, d);
+        return d;
     }
 
-    @Override
-    public void onListItemClick(ListView l, View v, int position, long id)
+    class LoadImage extends AsyncTask<Object, Void, Bitmap>
     {
-        Log.i("FragmentList", "Item clicked: " + id);
+        private LevelListDrawable mDrawable;
+
+        @Override
+        protected Bitmap doInBackground(Object... params)
+        {
+            String source = (String) params[0];
+            mDrawable = (LevelListDrawable) params[1];
+            try {
+                InputStream is = new URL(source).openStream();
+                return BitmapFactory.decodeStream(is);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Bitmap bitmap)
+        {
+            if (bitmap != null) {
+                BitmapDrawable d = new BitmapDrawable(bitmap);
+                mDrawable.addLevel(1, 1, d);
+                mDrawable.setBounds(0, 0, bitmap.getWidth(), bitmap.getHeight());
+                mDrawable.setLevel(1);
+                CharSequence t = tvContent.getText();
+                tvContent.setText(t);
+            }
+        }
     }
 
 }

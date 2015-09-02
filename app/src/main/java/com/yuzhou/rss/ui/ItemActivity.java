@@ -90,7 +90,7 @@ public class ItemActivity extends FragmentActivity
         public Fragment getItem(int position)
         {
             RssItem rssItem = rssItems.get(position);
-            return ItemFragment.newInstance(rssItem, position);
+            return ItemFragment.newInstance(rssItem);
         }
     }
 
