@@ -66,7 +66,8 @@ public class RssFeed implements Parcelable
 
     public void addRssItem(RssItem rssItem)
     {
-        rssItem.setFeed(this);
+        //FIXME: OOM
+        //rssItem.setFeed(this);
         rssItems.add(rssItem);
     }
 

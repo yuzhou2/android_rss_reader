@@ -48,7 +48,6 @@ public class ChannelFragment extends Fragment
     private MainActivity activity;
     private ChannelAdapter adapter;
     private ListView listView;
-    private List<RssItem> items;
 
     public ChannelFragment()
     {
@@ -84,7 +83,7 @@ public class ChannelFragment extends Fragment
 
         int layout = getArguments().getInt(ARG_RESOURCE_LAYOUT);
 
-        items = new ArrayList<>();
+        ArrayList<RssItem> items = new ArrayList<>();
         adapter = new ChannelAdapter(activity, layout, items);
         listView.setAdapter(adapter);
 
@@ -104,9 +103,8 @@ public class ChannelFragment extends Fragment
     {
         try {
             RssFeed feed = RssReader.read(result.get(0));
-            items.clear();
-            items.addAll(feed.getRssItems());
-            adapter.notifyDataSetChanged();
+            adapter.clear();
+            adapter.addAll(feed.getRssItems());
         } catch (SAXException e) {
             e.printStackTrace();
         } catch (IOException e) {
