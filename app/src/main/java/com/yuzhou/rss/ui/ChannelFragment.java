@@ -25,27 +25,27 @@ import java.util.List;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class ChannelFragment extends Fragment
+public class ChannelFragment extends BaseFragment
 {
-    private static final String ARG_NEWS_URL = "news_url";
-    private static final String ARG_RESOURCE_LAYOUT = "layout";
+//    private static final String ARG_NEWS_URL = "news_url";
+//    private static final String ARG_RESOURCE_LAYOUT = "layout";
 
     /**
      * Returns a new instance of this fragment for the given section
      * number.
      */
-    public static ChannelFragment newInstance(String url, int layout)
-    {
-        ChannelFragment fragment = new ChannelFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_NEWS_URL, url);
-        args.putInt(ARG_RESOURCE_LAYOUT, layout);
-        fragment.setArguments(args);
-        return fragment;
-    }
+//    public static ChannelFragment newInstance(String url, int layout)
+//    {
+//        ChannelFragment fragment = new ChannelFragment();
+//        Bundle args = new Bundle();
+//        args.putString(ARG_NEWS_URL, url);
+//        args.putInt(ARG_RESOURCE_LAYOUT, layout);
+//        fragment.setArguments(args);
+//        return fragment;
+//    }
 
-    private EventBus eventBus;
-    private MainActivity activity;
+//    private EventBus eventBus;
+//    private MainActivity activity;
     private ChannelAdapter adapter;
     private ListView listView;
 
@@ -53,20 +53,20 @@ public class ChannelFragment extends Fragment
     {
     }
 
-    @Override
-    public void onAttach(Activity activity)
-    {
-        super.onAttach(activity);
-        this.activity = (MainActivity) activity;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
-        eventBus = new EventBus();
-        eventBus.register(this);
-    }
+//    @Override
+//    public void onAttach(Activity activity)
+//    {
+//        super.onAttach(activity);
+//        this.activity = (MainActivity) activity;
+//    }
+//
+//    @Override
+//    public void onCreate(Bundle savedInstanceState)
+//    {
+//        super.onCreate(savedInstanceState);
+//        eventBus = new EventBus();
+//        eventBus.register(this);
+//    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -91,12 +91,12 @@ public class ChannelFragment extends Fragment
         fetcher.execute(getArguments().getString(ARG_NEWS_URL));
     }
 
-    @Override
-    public void onDestroy()
-    {
-        super.onDestroy();
-        eventBus.unregister(this);
-    }
+//    @Override
+//    public void onDestroy()
+//    {
+//        super.onDestroy();
+//        eventBus.unregister(this);
+//    }
 
     @Subscribe
     public void updateDownloadResult(List<String> result)

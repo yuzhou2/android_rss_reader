@@ -33,6 +33,7 @@ public class MainActivity extends Activity
         newsList = new ImmutableMap.Builder<String, String>()
                 .put("Inside 硬塞的網路趨勢觀察", "http://www.inside.com.tw/feed")
                 .put("蘋果日報", "http://www.appledaily.com.tw/rss/newcreate/kind/rnews/type/new")
+                .put("TechCrunch Japan", "http://feed.rssad.jp/rss/techcrunch/feed")
                 .build();
     }
 
@@ -71,8 +72,12 @@ public class MainActivity extends Activity
 
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getFragmentManager();
+//        fragmentManager.beginTransaction()
+//                .replace(R.id.container, ChannelFragment.newInstance(url, getLayout()))
+//                .commit();
+
         fragmentManager.beginTransaction()
-                .replace(R.id.container, ChannelFragment.newInstance(url, getLayout()))
+                .replace(R.id.container, BaseFragment.newInstance(url, getLayout()))
                 .commit();
     }
 
